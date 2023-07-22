@@ -1,0 +1,41 @@
+{
+	"name": "threads-daily-random-quote",
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"author": {
+		"email": "hi@338.rocks",
+		"name": "Barış DEMİRCİ",
+		"url": "https://338.rocks"
+	},
+	"license": "GPL-3.0",
+	"description": "Posting daily quotes to Threads!",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://gitea.338.rocks/barbarbar338/threads-daily-random-quote.git"
+	},
+	"scripts": {
+		"format": "prettier --write .",
+		"update": "taze latest -w",
+		"build": "tsc",
+		"prebuild": "rimraf dist",
+		"dev": "ts-node src",
+		"start": "node dist"
+	},
+	"devDependencies": {
+		"@types/node": "^20.4.4",
+		"@types/node-cron": "^3.0.8",
+		"prettier": "^3.0.0",
+		"rimraf": "^5.0.1",
+		"taze": "^0.11.2",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"axios": "^1.4.0",
+		"dotenv": "^16.3.1",
+		"envalid": "^7.3.1",
+		"node-cron": "^3.0.2",
+		"threads-api": "^1.5.4"
+	}
+}

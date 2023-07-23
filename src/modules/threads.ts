@@ -11,23 +11,20 @@ export class Threads {
 	private readonly threads = new ThreadsAPI({
 		username: config.THREADS_USERNAME,
 		password: config.THREADS_PASSWORD,
-		deviceID: config.THREADS_DEVICE_ID,
+		deviceID: config.DEVICE_ID,
 	});
 
 	public async authenticate() {
-		this.logger.info("Authenticating with Threads...");
+		this.logger.info("Authenticating...");
 
 		try {
 			await this.threads.login();
 			this.ready = true;
 		} catch (error) {
-			this.logger.warning(
-				"Failed to authenticate with Threads, disabling module.",
-			);
+			this.logger.warning("Failed to authenticate, disabling module.");
 		}
 
-		if (this.ready)
-			this.logger.success("Successfully authenticated with Threads.");
+		if (this.ready) this.logger.success("Successfully authenticated.");
 	}
 
 	private createMessage = (quote: IGeneratedResponse) => ({
@@ -40,15 +37,15 @@ export class Threads {
 	public async run(quote: IGeneratedResponse) {
 		if (!this.ready) return;
 
-		this.logger.info("Posting to Threads...");
+		this.logger.info("Posting...");
 
 		const message = this.createMessage(quote);
 
 		try {
 			const res = await this.threads.publish(message);
-			this.logger.success("Successfully posted to Threads!", res);
+			this.logger.success("Successfully posted!", res);
 		} catch (error) {
-			this.logger.error("Failed to publish message to Threads.");
+			this.logger.error("Failed to publish message.");
 			this.logger.warning(error);
 		}
 	}

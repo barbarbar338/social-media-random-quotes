@@ -1,10 +1,13 @@
 import { Logger } from "@hammerhq/logger";
-import { Threads } from "./modules/threads";
+import { Instagram } from "./modules/instagram";
 import { generateResponse } from "./utils";
 
 const logger = new Logger("[DailyQuotes]:");
 
-const modules = [new Threads()];
+const modules = [
+	//new Threads(),
+	new Instagram(),
+];
 
 async function main() {
 	try {

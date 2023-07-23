@@ -1,12 +1,13 @@
 import { Logger } from "@hammerhq/logger";
 import { schedule } from "node-cron";
+import { Discord } from "./modules/discord";
 import { Instagram } from "./modules/instagram";
 import { Threads } from "./modules/threads";
 import { generateResponse } from "./utils";
 
 const logger = new Logger("[DailyQuotes]:");
 
-const modules = [new Threads(), new Instagram()];
+const modules = [new Threads(), new Instagram(), new Discord()];
 
 async function main() {
 	try {

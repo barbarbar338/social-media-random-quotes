@@ -7,4 +7,6 @@ export const config = {
 	bannerAPI: `https://banner.338.rocks/banner?text=%{text}&extension=jpeg`,
 	...env,
 	birthdays,
+	avatarURL:
+		"https://worker.338.rocks/storage/uploads/images/456053332516143104.png",
 };

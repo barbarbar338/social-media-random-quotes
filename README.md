@@ -6,6 +6,7 @@
 
 -   Threads
 -   Instagram
+-   Discord
 
 # 👾 Examples
 
@@ -14,6 +15,9 @@ Instagram:
 
 Threads:
 ![Threads Example](https://worker.338.rocks/storage/uploads/images/456044779126521857.png)
+
+Discord:
+![Discord Example](https://worker.338.rocks/storage/uploads/images/456054284446990336.png)
 
 # 📦 Installation
 

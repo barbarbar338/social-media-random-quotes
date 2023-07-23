@@ -13,6 +13,7 @@ export const env = cleanEnv(process.env, {
 	THREADS_PASSWORD: str(),
 	INSTAGRAM_USERNAME: str(),
 	INSTAGRAM_PASSWORD: str(),
+	DISCORD_WEBHOOK_URL: str(),
 	DEVICE_ID: str({
 		default: randomDeviceID,
 	}),

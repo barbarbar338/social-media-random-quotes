@@ -1,6 +1,6 @@
 import axios from "axios";
 import { generate } from "generate-progressbar";
-import sharp from "sharp";
+import { config } from "./config";
 import { IQuote } from "./types";
 
 // TODO: create logger
@@ -34,7 +34,9 @@ export const getRandomQuote = async () => {
 		data: [quote],
 	} = await axios.get<IQuote[]>("https://api.quotable.io/quotes/random");
 
-	const image = await getImage(quote.content);
+	const image = `https://banner.338.rocks/banner?text=${encodeURIComponent(
+		quote.content,
+	)}&extension=jpeg`;
 
 	const text =
 		`"${quote.content}"\n` +
@@ -52,28 +54,7 @@ export const generateResponse = async () => {
 	const { text, image } = await getRandomQuote();
 
 	return {
-		content: `${text}\n\n${progress}\n\n⭐ This project is open sourced here: https://gitea.338.rocks/barbarbar338/threads-daily-random-quote`,
+		content: `${text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoUrl}`,
 		image,
 	};
-};
-
-// * Threads wants a JPG image, so we have to convert it. I will add an option to banner API to return a JPG image.
-// TODO: add option to banner API to return a JPG image
-export const getImage = async (text: string) => {
-	const imageURL = `https://banner.338.rocks/banner?text=${encodeURIComponent(
-		text,
-	)}`;
-
-	const { data } = await axios.get(imageURL, {
-		responseType: "arraybuffer",
-	});
-
-	const buffer = Buffer.from(data, "binary");
-
-	const res = await sharp(buffer)
-		.resize(1280, 720)
-		.toFormat("jpg")
-		.toBuffer();
-
-	return res;
 };

@@ -10,13 +10,16 @@
 
 # 👾 Examples
 
-Instagram:
+Instagram (https://www.instagram.com/threads_daily_quotes/):
+
 ![Instagram Example](https://worker.338.rocks/storage/uploads/images/456044393485434880.png)
 
-Threads:
+Threads (https://www.threads.net/@threads_daily_quotes):
+
 ![Threads Example](https://worker.338.rocks/storage/uploads/images/456044779126521857.png)
 
-Discord:
+Discord (https://discord.com/invite/BjEJFwh):
+
 ![Discord Example](https://worker.338.rocks/storage/uploads/images/456054284446990336.png)
 
 # 📦 Installation

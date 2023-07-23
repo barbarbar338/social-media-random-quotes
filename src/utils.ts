@@ -19,15 +19,20 @@ export const generateProgressString = () => {
 	const percentage = 100 - (daysLeft / 365) * 100;
 	const bar = generate(25, percentage);
 
-	return (
-		`📈 ${percentage.toFixed(2)}% ${bar}\n` +
-		`📆 Today is ${new Date().toLocaleString("en-US", {
+	const today = new Date();
+	const day = today.getDate();
+	const month = today.getMonth();
+
+	return `📈 ${percentage.toFixed(2)}% ${bar}\n` +
+		`📆 Today is ${today.toLocaleString("en-US", {
 			day: "numeric",
 			month: "long",
 			year: "numeric",
 		})}\n` +
-		`⏰ ${daysLeft} days left until new year!`
-	);
+		`⏰ ${daysLeft} days left until new year!` +
+		(day == 1 && month == 0)
+		? "\n🎉 Happy new years!"
+		: "";
 };
 
 export const getRandomQuote = async () => {
@@ -66,8 +71,20 @@ export const generateResponse = async (): Promise<IGeneratedResponse> => {
 	const progress = generateProgressString();
 	const quote = await getRandomQuote();
 
+	let res = `${quote.text}\n\n${progress}`;
+
+	const today = new Date();
+
+	const month = today.getMonth();
+	const day = today.getDate();
+
+	const birthdays = config.birthdays[month + 1][day];
+	if (birthdays) {
+		res += `\n\n🎂 Happy birthday ${birthdays.join(", ")}!`;
+	}
+
 	return {
-		text: `${quote.text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoURL}`,
+		text: `${res}\n\n⭐ This project is open sourced here: ${config.repoURL}`,
 		image: quote.image,
 	};
 };

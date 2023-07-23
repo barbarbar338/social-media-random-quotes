@@ -1,3 +1,4 @@
+import { birthdays } from "./birthdays";
 import { env } from "./env";
 
 export const config = {
@@ -5,4 +6,5 @@ export const config = {
 	randomQuoteAPI: "https://api.quotable.io/quotes",
 	bannerAPI: `https://banner.338.rocks/banner?text=%{text}&extension=jpeg`,
 	...env,
+	birthdays,
 };

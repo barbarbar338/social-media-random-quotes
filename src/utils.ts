@@ -80,7 +80,7 @@ export const generateResponse = async (): Promise<IGeneratedResponse> => {
 
 	const birthdays = config.birthdays[month + 1][day];
 	if (birthdays) {
-		res += `\n\n🎂 Happy birthday ${birthdays.join(", ")}!`;
+		res += `\n\n🎂 Happy birthday to ${birthdays.join(", ")}!`;
 	}
 
 	return {

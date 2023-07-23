@@ -21,28 +21,25 @@ export class Threads {
 			await this.threads.login();
 			this.ready = true;
 		} catch (error) {
-			this.logger.warning("Failed to authenticate, disabling module.");
+			this.logger.error("Failed to authenticate, disabling module.");
+			this.logger.warning(error);
 		}
 
 		if (this.ready) this.logger.success("Successfully authenticated.");
 	}
-
-	private createMessage = (quote: IGeneratedResponse) => ({
-		text: quote.text,
-		attachment: {
-			image: quote.image,
-		},
-	});
 
 	public async run(quote: IGeneratedResponse) {
 		if (!this.ready) return;
 
 		this.logger.info("Posting...");
 
-		const message = this.createMessage(quote);
-
 		try {
-			const res = await this.threads.publish(message);
+			const res = await this.threads.publish({
+				text: quote.text,
+				attachment: {
+					image: quote.image,
+				},
+			});
 			this.logger.success("Successfully posted!", res);
 		} catch (error) {
 			this.logger.error("Failed to publish message.");

@@ -20,6 +20,6 @@ export const env = cleanEnv(process.env, {
 
 if (env.DEVICE_ID === randomDeviceID) {
 	logger.warning(
-		"Using random device ID, set THREADS_DEVICE_ID env var to a unique value to avoid login issues.",
+		`Using random device ID, set DEVICE_ID env var to a unique value to avoid login issues. Current device ID: ${env.DEVICE_ID}`,
 	);
 }

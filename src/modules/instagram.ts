@@ -24,7 +24,7 @@ export class Instagram {
 
 			this.ready = true;
 		} catch (error) {
-			this.logger.warning("Failed to authenticate, disabling module.");
+			this.logger.error("Failed to authenticate, disabling module.");
 			this.logger.warning(error);
 		}
 
@@ -32,13 +32,14 @@ export class Instagram {
 	}
 
 	private async createMessage(quote: IGeneratedResponse) {
-		const buffer = await axios.get(quote.image, {
+		const res = await axios.get(quote.image, {
 			responseType: "arraybuffer",
 		});
+		const buffer = Buffer.from(res.data);
 
 		return {
 			text: quote.text,
-			image: Buffer.from(buffer.data),
+			image: buffer,
 		};
 	}
 

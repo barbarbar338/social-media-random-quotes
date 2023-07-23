@@ -1,4 +1,5 @@
 import { Logger } from "@hammerhq/logger";
+import { schedule } from "node-cron";
 import { Instagram } from "./modules/instagram";
 import { Threads } from "./modules/threads";
 import { generateResponse } from "./utils";
@@ -11,15 +12,26 @@ async function main() {
 	try {
 		logger.info("Starting DailyQuotes...");
 
-		const quote = await generateResponse();
+		const job = schedule("0 1 * * *", async () => {
+			logger.info("Running cron job...");
 
-		for (const module of modules) {
-			await module.authenticate();
+			const quote = await generateResponse();
 
-			await module.run(quote);
-		}
+			logger.info("Generated quote:");
+			logger.info(quote);
 
-		logger.success("Successfully posted all quotes!");
+			for (const module of modules) {
+				await module.authenticate();
+
+				await module.run(quote);
+			}
+
+			logger.success("Cron job finished!");
+		});
+
+		job.start();
+
+		logger.success("Cron job started!");
 	} catch (err) {
 		logger.error(err);
 	}

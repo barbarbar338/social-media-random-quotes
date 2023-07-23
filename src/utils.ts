@@ -2,7 +2,7 @@ import { Logger } from "@hammerhq/logger";
 import axios from "axios";
 import { generate } from "generate-progressbar";
 import { config } from "./config";
-import { IQuote } from "./types";
+import { IGeneratedResponse, IQuote } from "./types";
 
 const logger = new Logger("[Utils]:");
 
@@ -59,18 +59,15 @@ export const getRandomQuote = async () => {
 		`~ ${quote.author}\n\n` +
 		`📦 Fetched from ${config.randomQuoteAPI}/${quote._id}`;
 
-	return {
-		image,
-		text,
-	};
+	return { text, image };
 };
 
-export const generateResponse = async () => {
+export const generateResponse = async (): Promise<IGeneratedResponse> => {
 	const progress = generateProgressString();
-	const { text, image } = await getRandomQuote();
+	const quote = await getRandomQuote();
 
 	return {
-		content: `${text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoURL}`,
-		image,
+		text: `${quote.text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoURL}`,
+		image: quote.image,
 	};
 };

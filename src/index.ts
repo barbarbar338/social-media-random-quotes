@@ -1,6 +1,6 @@
 import { Logger } from "@hammerhq/logger";
 import { ThreadsAPI } from "threads-api";
-import { env } from "./env";
+import { config } from "./config";
 import { generateResponse } from "./utils";
 
 const logger = new Logger("[ThreadsDailyQuotes]:");
@@ -8,9 +8,9 @@ const logger = new Logger("[ThreadsDailyQuotes]:");
 async function main() {
 	try {
 		const threads = new ThreadsAPI({
-			username: env.THREADS_USERNAME,
-			password: env.THREADS_PASSWORD,
-			deviceID: env.THREADS_DEVICE_ID,
+			username: config.THREADS_USERNAME,
+			password: config.THREADS_PASSWORD,
+			deviceID: config.THREADS_DEVICE_ID,
 		});
 
 		const quote = await generateResponse();
@@ -18,10 +18,7 @@ async function main() {
 		const res = await threads.publish({
 			text: quote.content,
 			attachment: {
-				image: {
-					type: "image/jpg",
-					data: quote.image,
-				},
+				image: quote.image,
 			},
 		});
 

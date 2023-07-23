@@ -32,16 +32,17 @@ export const generateProgressString = () => {
 export const getRandomQuote = async () => {
 	const {
 		data: [quote],
-	} = await axios.get<IQuote[]>("https://api.quotable.io/quotes/random");
+	} = await axios.get<IQuote[]>(`${config.randomQuoteAPI}/random`);
 
-	const image = `https://banner.338.rocks/banner?text=${encodeURIComponent(
-		quote.content,
-	)}&extension=jpeg`;
+	const image = config.bannerAPI.replace(
+		"%{text}",
+		encodeURIComponent(quote.content),
+	);
 
 	const text =
 		`"${quote.content}"\n` +
 		`~ ${quote.author}\n\n` +
-		`📦 Fetched from https://api.quotable.io/quotes/${quote._id}`;
+		`📦 Fetched from ${config.randomQuoteAPI}/${quote._id}`;
 
 	return {
 		image,
@@ -54,7 +55,7 @@ export const generateResponse = async () => {
 	const { text, image } = await getRandomQuote();
 
 	return {
-		content: `${text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoUrl}`,
+		content: `${text}\n\n${progress}\n\n⭐ This project is open sourced here: ${config.repoURL}`,
 		image,
 	};
 };

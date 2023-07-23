@@ -1,9 +1,10 @@
+import { Logger } from "@hammerhq/logger";
 import axios from "axios";
 import { generate } from "generate-progressbar";
 import { config } from "./config";
 import { IQuote } from "./types";
 
-// TODO: create logger
+const logger = new Logger("[Utils]:");
 
 export const calculateDaysLeftUntilNextYear = () => {
 	const now = new Date();
@@ -30,9 +31,23 @@ export const generateProgressString = () => {
 };
 
 export const getRandomQuote = async () => {
-	const {
-		data: [quote],
-	} = await axios.get<IQuote[]>(`${config.randomQuoteAPI}/random`);
+	let quote: IQuote = {
+		_id: "37aUWcuNWjSh",
+		author: "Frank Lloyd Wright",
+		content:
+			"The thing always happens that you really believe in; and the belief in a thing makes it happen. (Cannot fetch a new quote from API, using default quote instead.)",
+	};
+
+	try {
+		const { data } = await axios.get<IQuote[]>(
+			`${config.randomQuoteAPI}/random`,
+		);
+
+		quote = data[0];
+	} catch (error) {
+		logger.error("Failed to fetch random quote from API.");
+		logger.warning(error);
+	}
 
 	const image = config.bannerAPI.replace(
 		"%{text}",

@@ -23,16 +23,16 @@ export const generateProgressString = () => {
 	const day = today.getDate();
 	const month = today.getMonth();
 
-	return `📈 ${percentage.toFixed(2)}% ${bar}\n` +
+	return (
+		`📈 ${percentage.toFixed(2)}% ${bar}\n` +
 		`📆 Today is ${today.toLocaleString("en-US", {
 			day: "numeric",
 			month: "long",
 			year: "numeric",
 		})}\n` +
 		`⏰ ${daysLeft} days left until new year!` +
-		(day == 1 && month == 0)
-		? "\n🎉 Happy new years!"
-		: "";
+		(day == 1 && month == 0 ? "\n🎉 Happy new years!" : "")
+	);
 };
 
 export const getRandomQuote = async () => {

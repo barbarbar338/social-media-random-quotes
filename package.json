@@ -1,5 +1,5 @@
 {
-	"name": "threads-daily-random-quote",
+	"name": "social-media-random-quotes",
 	"version": "0.0.1",
 	"main": "dist/index.js",
 	"author": {
@@ -8,11 +8,11 @@
 		"url": "https://338.rocks"
 	},
 	"license": "GPL-3.0",
-	"description": "Posting daily quotes to Threads!",
+	"description": "Posting daily quotes to some social media platforms!",
 	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "git+https://gitea.338.rocks/barbarbar338/threads-daily-random-quote.git"
+		"url": "git+https://gitea.338.rocks/barbarbar338/social-media-random-quotes.git"
 	},
 	"scripts": {
 		"format": "prettier --write .",

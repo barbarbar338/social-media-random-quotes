@@ -3,7 +3,7 @@ import { env } from "./env";
 
 export const config = {
 	repoURL: "https://gitea.338.rocks/barbarbar338/threads-daily-random-quote",
-	randomQuoteAPI: "https://api.quotable.io/quotes",
+	randomQuoteAPI: "https://api.api-ninjas.com/v1/quotes",
 	bannerAPI: `https://api.338.rocks/canvas/banner?message=%{text}&extension=jpeg`,
 	...env,
 	birthdays,

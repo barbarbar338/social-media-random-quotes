@@ -1,7 +1,6 @@
 export interface IQuote {
-	quote: string;
+	content: string;
 	author: string;
-	category: string;
 }
 
 export interface IGeneratedResponse {

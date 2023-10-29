@@ -37,17 +37,12 @@ export const generateProgressString = () => {
 
 export const getRandomQuote = async () => {
 	let quote: IQuote = {
-		quote: "Today when I think about diversity, I actually think about the word 'inclusion.' And I think this is a time of great inclusion. It's not men, it's not women alone. Whether it's geographic, it's approach, it's your style, it's your way of learning, the way you want to contribute, it's your age - it is really broad.",
-		author: "Ginni Rometty",
-		category: "learning",
+		content: "No man is free who is not master of himself.",
+		author: "Epictetus",
 	};
 
 	try {
-		const { data } = await axios.get<IQuote[]>(config.randomQuoteAPI, {
-			headers: {
-				"X-Api-Key": config.API_NINJA_KEY,
-			},
-		});
+		const { data } = await axios.get<IQuote[]>(config.randomQuoteAPI);
 
 		quote = data[0];
 	} catch (error) {
@@ -57,11 +52,11 @@ export const getRandomQuote = async () => {
 
 	const image = config.bannerAPI.replace(
 		"%{text}",
-		encodeURIComponent(quote.quote),
+		encodeURIComponent(quote.content),
 	);
 
 	const text =
-		`"${quote.quote}"\n` +
+		`"${quote.content}"\n` +
 		`~ ${quote.author}\n\n` +
 		`📦 Fetched from ${config.randomQuoteAPI}`;
 

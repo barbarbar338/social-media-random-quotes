@@ -9,26 +9,28 @@ const logger = new Logger("[DailyQuotes]:");
 
 const modules = [new Threads(), new Instagram(), new Discord()];
 
+async function steps() {
+	logger.info("Running cron job...");
+
+	const quote = await generateResponse();
+
+	logger.info("Generated quote:");
+	logger.info(quote);
+
+	for (const module of modules) {
+		await module.authenticate();
+
+		await module.run(quote);
+	}
+
+	logger.success("Cron job finished!");
+}
+
 async function main() {
 	try {
 		logger.info("Starting DailyQuotes...");
 
-		const job = schedule("0 1 * * *", async () => {
-			logger.info("Running cron job...");
-
-			const quote = await generateResponse();
-
-			logger.info("Generated quote:");
-			logger.info(quote);
-
-			for (const module of modules) {
-				await module.authenticate();
-
-				await module.run(quote);
-			}
-
-			logger.success("Cron job finished!");
-		});
+		const job = schedule("0 1 * * *", steps);
 
 		job.start();
 

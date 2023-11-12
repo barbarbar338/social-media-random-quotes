@@ -23,8 +23,8 @@
 		"start": "node dist"
 	},
 	"devDependencies": {
-		"@types/node": "^20.8.9",
-		"@types/node-cron": "^3.0.10",
+		"@types/node": "^20.9.0",
+		"@types/node-cron": "^3.0.11",
 		"prettier": "^3.0.3",
 		"rimraf": "^5.0.5",
 		"taze": "^0.12.0",
@@ -33,14 +33,13 @@
 	},
 	"dependencies": {
 		"@hammerhq/logger": "^0.1.5",
-		"axios": "^1.6.0",
+		"axios": "^1.6.1",
 		"discord.js": "^14.13.0",
 		"dotenv": "^16.3.1",
 		"envalid": "^8.0.0",
 		"generate-progressbar": "^0.0.2",
 		"instagram-private-api": "^1.45.3",
-		"node-cron": "^3.0.2",
+		"node-cron": "^3.0.3",
 		"threads-api": "^1.6.3"
 	}
 }
-

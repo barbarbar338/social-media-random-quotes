@@ -42,13 +42,15 @@ export const getRandomQuote = async () => {
 	};
 
 	try {
-		const { data } = await axios.get<IQuote[]>(config.randomQuoteAPI);
+		const { data } = await axios.get<IQuote>(config.randomQuoteAPI);
 
-		quote = data[0];
+		quote = data;
 	} catch (error) {
 		logger.error("Failed to fetch random quote from API.");
 		logger.warning(error);
 	}
+
+	console.log(quote);
 
 	const image = config.bannerAPI.replace(
 		"%{text}",
